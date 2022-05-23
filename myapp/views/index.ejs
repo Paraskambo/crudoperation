@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Paras Kamboj</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/viewallcontacts">View All contacts</a></li>
+    </ul>
+    <% if(msg != '') { %>
+      <h1><%= msg %></h1>
+   <% } %>
+    <h2>Contact Us Form</h2>
+    <div class="form-class">
+      <form action="/contact" method="post" role="form">
+        <label>Full Name</label><br/>
+        <input name="fullname" type="text" placeholder="Full Name"/><br/>
+        <label>Mobile</label><br/>
+        <input name="mobile" type="number" placeholder="Mobile"/><br/>
+
+        <label>Email</label><br/>
+        <input name="email" type="email" placeholder="Email"/><br/>
+
+        <label>Message</label><br/>
+        <textarea name="message">
+
+        </textarea><br/>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+<br/><br/>
+    <h2>Voter Registration Form</h2>
+    <div class="form-class">
+      <form action="/registervoter" method="post" role="form">
+        <label>Full Name</label><br/>
+        <input name="fullname" type="text" placeholder="Full Name"/><br/>
+        <label>Age</label><br/>
+        <input name="age" type="number" placeholder="Age"/><br/>
+
+        <label>Mobile</label><br/>
+        <input name="mobile" type="number" placeholder="Mobile"/><br/>
+
+        <label>Email</label><br/>
+        <input name="email" type="email" placeholder="Email"/><br/>
+
+        <label>Voter Id</label><br/>
+        <input name="voterid" type="text" placeholder="Email"/><br/>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <br/><br/>
+    <h2>Candidate Registration Form</h2>
+    <div class="form-class">
+      <form action="/registercandidate" method="post" role="form">
+        <label>Full Name</label><br/>
+        <input name="fullname" type="text" placeholder="Full Name"/><br/>
+        <label>Age</label><br/>
+        <input name="age" type="number" placeholder="Age"/><br/>
+
+        <label>Mobile</label><br/>
+        <input name="mobile" type="number" placeholder="Mobile"/><br/>
+
+        <label>Email</label><br/>
+        <input name="email" type="email" placeholder="Email"/><br/>
+
+        <label>Voter Id</label><br/>
+        <input name="voterid" type="text" placeholder="Email"/><br/>
+
+        <button type="submit">Register Candidate</button>
+      </form>
+    </div>
+  </body>
+</html>

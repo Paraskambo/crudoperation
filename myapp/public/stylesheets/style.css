@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+ 
+}
+
+a {
+  color: #00B7FF;
+}
+.form-class {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.form-class form {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.form-class form label {
+  width: 70%;
+  height: auto;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: .5em;
+}
+.form-class form input {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  padding: .5em;
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+.form-class form textarea {
+  width: 70%;
+  max-width: 70%;
+  height: auto;
+  margin: auto;
+  padding: .5em;
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+.form-class button {
+  width: 70%;
+  max-width: 70%;
+  height: auto;
+  margin: auto;
+  padding: .5em;
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+  margin-top: 1em;
+}
