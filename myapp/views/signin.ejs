@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Paras Kamboj</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/viewallcontacts">View All contacts</a></li>
+    </ul>
+    <% if(msg != '') { %>
+      <h1><%= msg %></h1>
+   <% } %>
+
+   <h2>Sign in Form or if Not Registered <a href="/">Sign up</a></h2>
+    <div class="form-class">
+      <form action="/signin" method="POST" role="form">
+        <label>Email or Username</label><br/>
+        <input name="emailorusername" type="text" placeholder="Email or Username..."/><br/>
+        
+        <label>Password</label><br/>
+        <input name="password" type="password" placeholder="Password..."/><br/>
+
+        
+        <button type="submit">Sign in</button>
+      </form>
+
+    </div>
+<br/><br/>
+
+   
+    
+  </body>
+</html>

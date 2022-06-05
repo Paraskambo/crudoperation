@@ -5,10 +5,83 @@ var router = express.Router();
 var contactModel = require('../models/contactusschema.js')
 var voterModel = require('../models/voterregistrationschema');
 var candidateModel = require('../models/candidatesschema');
+var signupModel = require('../models/signupschema');
+var bcrypt = require('bcryptjs');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express', msg: '' });
 });
+//Middleware 
+const checkExistingMobileInDataBase = (req, res, next) => {
+  const getExistingMobileData = signupModel.findOne({Mobile: req.body.mobile});
+  getExistingMobileData.exec((err, existingMobileData) => {
+    if(err) throw err;
+    if(existingMobileData != null) {
+      res.render('index', { title: 'Express', msg: 'This Mobile is Already Registered, Try Another One!' });
+    } else {
+      next();
+    }
+  });
+}
+const checkExistingEmailInDataBase = (req, res, next) => {
+  const getExistingEmailData = signupModel.findOne({Email: req.body.email});
+  getExistingEmailData.exec((err, existingEmailData) => {
+    if(err) throw err;
+    if(existingEmailData != null) {
+      res.render('index', { title: 'Express', msg: 'This Email is Already Registered, Try Another One!' });
+    } else {
+      next();
+    }
+  });
+}
+
+const checkExistingUsernameInDataBase = (req, res, next) => {
+  const getExistingUsernameData = signupModel.findOne({UserName: req.body.username});
+  getExistingUsernameData.exec((err, existingData) => {
+    if(err) throw err;
+    if(existingData != null) {
+      res.render('index', { title: 'Express', msg: 'Username Not Available' });
+    } else {
+      next();
+    }
+  });
+}
+//sign up
+router.post('/signup', checkExistingMobileInDataBase, checkExistingEmailInDataBase, checkExistingUsernameInDataBase, (req, res, next) => {
+
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmpassword;
+
+  const hashedPassword = bcrypt.hashSync(password, 12)
+  if(password != confirmPassword || password == '' || confirmPassword == '') {
+    res.render('index', { title: 'Express', msg: 'Passwords Not Matched! Try Again!' });
+  } else {
+    var signupDetails = new signupModel({
+      FirstName: req.body.firstname,
+      LastName: req.body.lastname,
+      Mobile: req.body.mobile,
+      Email: req.body.email,
+      UserName: req.body.username,
+      Password: hashedPassword
+    });
+    signupDetails.save((err) => {
+      if(err) {
+        res.render('index', { title: 'Express', msg: 'Something Wrong! Try Again!' });
+      } 
+      res.render('index', { title: 'Express', msg: 'Sign Up Successful, You may Sign in now!' });
+    });
+  }  
+});
+
+router.get('/signup', (req, res, next) => {
+
+  res.render('index', { title: 'Express', msg: '' });
+})
+
+
+
+
+
 
 //Contact us form Create
 router.post('/contact', (req, res, next) => {
@@ -100,4 +173,46 @@ router.get('/registercandidate', function(req, res, next) {
 });
 
 
+router.post('/signin', function(req, res, next) {
+  var username = req.body.emailorusername;
+  var password = req.body.password;
+
+  var getUserData = signupModel.findOne({UserName: username})
+  getUserData.exec((err, userData) => {
+    if (err) throw err;
+    if(userData != null) {      
+      //get password
+      //password compare
+      //sign in using req.session
+      //redirect to 
+      var getPassword = userData.Password; //password from database
+      if(bcrypt.compareSync(password, getPassword)) {
+        req.session.userLoginUsername = username;
+        //res.redirect('/dashbaord');
+        res.render('dashboard', { title: 'Express', msg: '', logInUser: req.session.userLoginUsername });
+      } else {
+        res.render('index', { title: 'Express', msg: 'Wrong Password', logInUser: ''});
+      }
+    } else {
+      res.render('index', { title: 'Express', msg: 'Invalid Username',logInUser: '' });
+    }
+  });
+  //res.render('index', { title: 'Express', msg: '' });
+});
+
+//Sign out
+router.post("/signout", function(req, res, next) {
+  req.session.destroy(function(err) {
+    if(err) {
+      res.redirect('/');
+    } else {
+      res.render('index', { title: 'Project Interview', msg:'Signed Out Succesfully! See You Soon' });
+
+    } 
+  });   
+  })
+
+  router.get('/signout', function(req, res, next) {
+    res.render('index', { title: 'Express', msg: ''});
+  });
 module.exports = router;

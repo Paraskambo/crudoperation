@@ -13,6 +13,36 @@
     <% if(msg != '') { %>
       <h1><%= msg %></h1>
    <% } %>
+
+   <h2>Sign Up Form or Already Registered <a href="/signin">Sign</a></h2>
+    <div class="form-class">
+      <form action="/signup" method="post" role="form">
+        <label>First Name</label><br/>
+        <input name="firstname" type="text" placeholder="First Name..."/><br/>
+        <label>Last Name</label><br/>
+        <input name="lastname" type="text" placeholder="Last Name..."/><br/>
+
+        <label>Mobile</label><br/>
+        <input name="mobile" type="number" placeholder="Mobile..."/><br/>
+
+        <label>Email</label><br/>
+        <input name="email" type="email" placeholder="Email..."/><br/>
+
+        <label>Username</label><br/>
+        <input name="username" type="text" placeholder="Username"/><br/>
+
+        <label>Password</label><br/>
+        <input name="password" type="password" placeholder="Password..."/><br/>
+
+        <label>Confirm Password</label><br/>
+        <input name="confirmpassword" type="password" placeholder="Confirm Password..."/><br/>    
+       
+        <button type="submit">Sign up</button>
+      </form>
+
+    </div>
+<br/><br/>
+
     <h2>Contact Us Form</h2>
     <div class="form-class">
       <form action="/contact" method="post" role="form">
